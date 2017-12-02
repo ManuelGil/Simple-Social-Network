@@ -23,7 +23,7 @@ Fav Quote is a Micro Social Network with PHP, MySQL (PDO), Bootstrap 3 and
 To validate the login forms uses the [validator for bootstrap](http://1000hz.github.io/bootstrap-validator/)
 
 <a name="started"></a>
-## :traffic_light:Getting Started
+## :traffic_light: Getting Started
 
 This page will help you get started with Fav Quote (Simple Social Network).
 
@@ -90,18 +90,18 @@ ENGINE = InnoDB;
   5. Add the project folder to the editor
 
 <a name="built"></a>
-## :wrench:Built With
+## :wrench: Built With
 
   * XAMPP ([XAMPP for Windows 5.6.32](https://www.apachefriends.org/download.html))
   * ATOM ([ATOM](https://atom.io/))
 
 <a name="test"></a>
-## :100:Running the tests
+## :100: Running the tests
 
 You can can test a [demo websites](https://fav-quote.000webhostapp.com/).
 
 <a name="changelog"></a>
-## :information_source:Changelog
+## :information_source: Changelog
 
 **1.0.0.1** (02/12/2017)
 
@@ -168,22 +168,22 @@ You can can test a [demo websites](https://fav-quote.000webhostapp.com/).
 	</table>
 
 <a name="Donate"></a>
-## :gift:Donate!
+## :gift: Donate!
 
 If you want to help me to continue this project, you might donate via PayPal.
 
 <a href="https://paypal.me/ManuelFGil"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_92x26.png" alt="Donate via PayPal"></a>
 
 <a name="authors"></a>
-## :eyeglasses:Authors
+## :eyeglasses: Authors
 
   * **Manuel Gil** - *Initial work* - [ManuelGil](https://github.com/ManuelGil) 
 
-See also the list of [contributors](https://github.com/ManuelGil/Reset-Windows-Update-Tool/contributors)
+See also the list of [contributors](https://github.com/ManuelGil/Simple-Social-Network/contributors)
  who participated in this project.
 
 <a name="license"></a>
-## :memo:License
+## :memo: License
 
 Fav Quote is licensed under the MIT License - see the
  [MIT License](https://opensource.org/licenses/MIT) for details.
