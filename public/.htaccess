@@ -1,0 +1,18 @@
+<IfModule mod_php5.c>
+    php_flag output_buffering on
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    ErrorDocument 401 "Unauthorized"
+    ErrorDocument 403 "Forbidden"
+    ErrorDocument 404 "Not Found"
+
+    RewriteEngine On
+    RewriteBase /
+
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    RewriteRule ^([^/]*)$ /index.php?page=$1 [L]
+</IfModule>
