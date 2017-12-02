@@ -98,7 +98,7 @@ ENGINE = InnoDB;
 <a name="test"></a>
 ## :100: Running the tests
 
-You can can test a [demo websites](https://fav-quote.000webhostapp.com/).
+You can test a [demo websites](https://fav-quote.000webhostapp.com/).
 
 <a name="changelog"></a>
 ## :information_source: Changelog
