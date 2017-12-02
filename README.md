@@ -98,12 +98,12 @@ ENGINE = InnoDB;
 <a name="test"></a>
 ## :100: Running the tests
 
-You can test a [demo websites](https://fav-quote.000webhostapp.com/).
+You can test a demo websites [here](https://fav-quote.000webhostapp.com/).
 
 <a name="changelog"></a>
 ## :information_source: Changelog
 
-**1.0.0.1** (02/12/2017)
+**1.0.0-beta.1** (02/12/2017)
 
   * <table border="0" cellpadding="4">
 		<tr>
@@ -124,7 +124,7 @@ You can test a [demo websites](https://fav-quote.000webhostapp.com/).
 						PHP 5.6
 					</li>
 					<li>
-						My SQL or MariaDB 
+						MySQL or MariaDB 
 					</li>
 					<li>
 						Apache Server
