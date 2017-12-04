@@ -103,7 +103,7 @@ You can test a demo websites [here](https://fav-quote.000webhostapp.com/).
 <a name="changelog"></a>
 ## :information_source: Changelog
 
-**1.0.0-beta.1** (02/12/2017)
+**1.0.0-beta.1** (12/02/2017)
 
   * <table border="0" cellpadding="4">
 		<tr>
@@ -139,13 +139,13 @@ You can test a demo websites [here](https://fav-quote.000webhostapp.com/).
 			<td>
 				<ul>
 					<li>
-						Bootstrap 3
+						[Bootstrap 3](https://getbootstrap.com/docs/3.3/getting-started/)
 					</li>
 					<li>
-						Validator for Bootstrap 3 
+						[Validator for Bootstrap 3](http://1000hz.github.io/bootstrap-validator/)
 					</li>
 					<li>
-						Vue.JS 2
+						[Vue.JS 2](https://vuejs.org/v2/guide/installation.html)
 					</li>
 				</ul>
 			</td>
