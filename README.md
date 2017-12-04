@@ -139,13 +139,13 @@ You can test a demo websites [here](https://fav-quote.000webhostapp.com/).
 			<td>
 				<ul>
 					<li>
-						[Bootstrap 3](https://getbootstrap.com/docs/3.3/getting-started/)
+						<a href="https://getbootstrap.com/docs/3.3/getting-started/">Bootstrap 3</a>
 					</li>
 					<li>
-						[Validator for Bootstrap 3](http://1000hz.github.io/bootstrap-validator/)
+						<a href="http://1000hz.github.io/bootstrap-validator/">Validator for Bootstrap 3</a>
 					</li>
 					<li>
-						[Vue.JS 2](https://vuejs.org/v2/guide/installation.html)
+						<a href="https://vuejs.org/v2/guide/installation.html">Vue.JS 2</a>
 					</li>
 				</ul>
 			</td>
