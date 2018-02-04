@@ -1,5 +1,5 @@
 <!-- import Vue.js 2 for developers -->
-<script src="js/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
 <?php
 
@@ -51,7 +51,7 @@
 		<script type="text/javascript">
 			var app = new Vue({
 				el: '#table', // Object id
-				created: function() {
+				created: function () {
 					this.load() // invoke the load method in the creation state of Vue.js
 				},
 				data: {
@@ -60,21 +60,21 @@
 					quote: '' // Attribute to linked with search
 				},
 				methods: {
-					load: function() {
+					load: function () {
 						this.items = <?= $items ?>, // Load the items array
-						this.votes = <?= $votes ?> // Load the voted publications
+								this.votes = <?= $votes ?> // Load the voted publications
 					},
-					contains: function(key) {
-			      for (var i=0; i < this.votes.length; i++) { // Go through the array of voted publications
-			        if( this.votes[i] == key){
-			          return true // If publication is voted
-			        }
-			      }
-			      return false // If publication isn´t voted
-			    }
+					contains: function (key) {
+						for (var i = 0; i < this.votes.length; i++) { // Go through the array of voted publications
+							if (this.votes[i] == key) {
+								return true // If publication is voted
+							}
+						}
+						return false // If publication isn´t voted
+					}
 				},
 				computed: {
-					search: function() { // Iterates the items array and return the items that matches with the search
+					search: function () { // Iterates the items array and return the items that matches with the search
 						return this.items.filter((item) => item.quote.includes(this.quote))
 					}
 				}

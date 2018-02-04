@@ -8,7 +8,7 @@
 
 	if (isset($_GET['id'])) {
 		// Gets the publication id
-    $id = (int) $_GET['id'];
+		$id = (int) $_GET['id'];
 
 		// Gets the database connection
 		$conn = getConnection();
@@ -21,17 +21,17 @@
 
 			foreach (array_keys($_SESSION["voted"], $id) as $key) {
 				// Removes the publication id into the voted publications
-			  unset($_SESSION["voted"][$key]);
+				unset($_SESSION["voted"][$key]);
 			}
 
 			// Redirect to homepage
 			header('location: ../../public/index.php?page=home.php');
 		} catch (PDOException $e) {
 			header('location: ../../public/index.php?page=home.php&error=' . $e->getMessage());
-    } finally {
+		} finally {
 			// Redirect to homepage
-      $conn = null;
-    }
+			$conn = null;
+		}
 	}
 
 ?>

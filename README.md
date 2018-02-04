@@ -7,10 +7,10 @@
 		<img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Status">
 	</a>
 	<a href="#changelog">
-		<img src="https://img.shields.io/badge/release-v1.0.0--beta.1-yellow.svg" alt="Version">
+		<img src="https://img.shields.io/badge/release-v1.0.0--beta.2-yellow.svg" alt="Version">
 	</a>
 	<a href="#changelog">
-		<img src="https://img.shields.io/badge/update-december-yellowgreen.svg" alt="Update">
+		<img src="https://img.shields.io/badge/update-february-yellowgreen.svg" alt="Update">
 	</a>
 	<a href="#license">
 		<img src="https://img.shields.io/badge/license-MIT%20License-green.svg" alt="License">
@@ -60,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `NETWORK`.`USERS` (
   UNIQUE INDEX `USER_UNIQUE` (`USERNAME` ASC))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `NETWORK`.`QUOTES`
 -- -----------------------------------------------------
@@ -98,10 +97,74 @@ ENGINE = InnoDB;
 <a name="test"></a>
 ## :100: Running the tests
 
-You can test a demo websites [here](https://fav-quote.000webhostapp.com/).
+You can test a demo websites [here](http://fav-quote.byethost17.com).
 
 <a name="changelog"></a>
 ## :information_source: Changelog
+
+**1.0.0-beta.2** (02/04/2018)
+
+  * <table border="0" cellpadding="4">
+		<tr>
+			<td>
+				<strong>Language:</strong>
+			</td>
+			<td>
+				HTML, PHP, JavaScript
+			</td>
+		</tr>
+		<tr>
+			<td><strong>
+				Requirements:
+			</strong></td>
+			<td>
+				<ul>
+					<li>
+						PHP 5.6
+					</li>
+					<li>
+						MySQL or MariaDB 
+					</li>
+					<li>
+						Apache Server
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>
+				Features:
+			</strong></td>
+			<td>
+				<ul>
+					<li>
+						<a href="https://getbootstrap.com/docs/3.3/getting-started/">Bootstrap 3</a>
+					</li>
+					<li>
+						<a href="http://1000hz.github.io/bootstrap-validator/">Validator for Bootstrap 3</a>
+					</li>
+					<li>
+						<a href="https://vuejs.org/v2/guide/installation.html">Vue.JS 2</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>Changes:</strong>
+			</td>
+			<td>
+				<ul>
+					<li>
+						Implementation of CDN
+					</li>
+					<li>
+						Logout verification
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
 
 **1.0.0-beta.1** (12/02/2017)
 

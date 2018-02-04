@@ -5,7 +5,7 @@
 
 	if (isset($_GET['id'])) {
 		// Gets the publication id
-    $id = (int) $_GET['id'];
+		$id = (int) $_GET['id'];
 
 		// Gets the database connection
 		$conn = getConnection();
@@ -20,10 +20,10 @@
 			header('location: ../../public/index.php?page=home.php');
 		} catch (PDOException $e) {
 			header('location: ../../public/index.php?page=home.php&error=' . $e->getMessage());
-    } finally {
+		} finally {
 			// Destroy the database connection
-      $conn = null;
-    }
+			$conn = null;
+		}
 	}
 
 ?>

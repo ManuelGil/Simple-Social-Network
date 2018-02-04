@@ -27,7 +27,7 @@
 					$_SESSION["login"] = TRUE;
 					$_SESSION["id"] = $query->ID_USER;
 					$_SESSION["user"] = $query->USERNAME;
-					$_SESSION['voted'] = array();
+					$_SESSION["voted"] = array();
 
 					// Redirect to homepage
 					header('location: ../../public/index.php?page=home.php');
@@ -40,12 +40,12 @@
 				header('location: ../../public/index.php?error=The user specified does not exist.');
 			}
 		} catch (PDOException $e) {
-      header('location: ../../public/index.php?error=' . $e->getMessage());
-    } finally {
+			header('location: ../../public/index.php?error=' . $e->getMessage());
+		} finally {
 			// Destroy the database connection
-      $conn = null;
-    }
-	} elseif(isset($_POST['signup'])=='Sign up') {
+			$conn = null;
+		}
+	} elseif (isset($_POST['signup']) == 'Sign up') {
 		// Gets username and password
 		$user = htmlentities(trim($_POST['username']));
 		$pass = password_hash(htmlentities(trim($_POST['password'])), PASSWORD_DEFAULT);
@@ -64,10 +64,10 @@
 			header('location: ../../public/index.php?error=Your account has been successfully created.');
 		} catch (PDOException $e) {
 			header('location: ../../public/index.php?error=' . $e->getMessage());
-    } finally {
+		} finally {
 			// Destroy the database connection
-      $conn = null;
-    }
+			$conn = null;
+		}
 	}
 
 ?>
