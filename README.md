@@ -17,8 +17,8 @@
 	</a>
 </div>
 
-Fav Quote is a Micro Social Network with PHP, MySQL (PDO), Bootstrap 3 and
- Vue.JS 2. This project don't not use classes or a php framework.
+Fav Quote is a Micro Social Network developed in PHP, MySQL (PDO_MYSQL Controller for the connection),
+ Bootstrap 3 and Vue.JS 2. This project don't use classes or a php framework.
 
 To validate the login forms uses the [validator for bootstrap](http://1000hz.github.io/bootstrap-validator/)
 
