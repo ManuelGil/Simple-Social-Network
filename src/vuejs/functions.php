@@ -4,17 +4,24 @@
 <?php
 
 	/**
-	 * This function display a error message inside the message object
-	 * @param String $message - The error message
+	 * This function load the countries
 	 */
-	function showMessage($message) {
+	function loadCountries($countries) {
 		?>
 
 		<script type="text/javascript">
-			var app = new Vue({
-				el: '#message', // Object id
+			new Vue({
+				el: '#app', // Object id
+				created: function () {
+					this.load() // invoke the load method in the creation state of Vue.js
+				},
 				data: {
-					message: '<?= $message ?>' // Error message
+					countries: [] // Array of countries
+				},
+				methods: {
+					load: function () {
+						this.countries = <?= $countries; ?> // Load the array of countries
+					}
 				}
 			})
 		</script>

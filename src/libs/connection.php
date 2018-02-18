@@ -25,7 +25,8 @@
 			// Return the connection
 			return $connection;
 		} catch (PDOException $e) {
-			die("Error: " . $e->getMessage());
+			die('<strong>DataBase Error</strong>: Connection failed.<br>' . $e->getMessage());
+			exit;
 		}
 	}
 

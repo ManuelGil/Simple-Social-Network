@@ -8,24 +8,40 @@
 
 	if (isset($_GET['id'])) {
 		// Gets the publication id
-		$id = (int) $_GET['id'];
+		$quote = (int) $_GET['id'];
+		$user = (int) $_SESSION["id"];
 
 		// Gets the database connection
 		$conn = getConnection();
 
 		try {
-			// Increments the 'likes' in the publication
-			$stmt = $conn->prepare("UPDATE QUOTES SET LIKES=LIKES+1 WHERE ID_QUOTE=:id");
-			$stmt->bindParam(":id", $id);
-			$stmt->execute();
+			$stmt = $conn->prepare("INSERT INTO LIKES (ID_USER, ID_QUOTE) VALUES (:user, :quote)");
+			$stmt->bindParam(":user", $user);
+			$stmt->bindParam(":quote", $quote);
+			$result = $stmt->execute();
 
-			// Adds the publication id into the voted publications
-			array_push($_SESSION["voted"], $id);
+			if ($result) {
+				// Increments the 'likes' in the publication
+				$stmt = $conn->prepare("UPDATE QUOTES SET LIKES = LIKES + 1 WHERE ID_QUOTE = :id");
+				$stmt->bindParam(":id", $quote);
+				$stmt->execute();
+
+				// Adds the publication id into the voted publications
+				array_push($_SESSION["voted"], $quote);
+			}
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home.php');
+			header('location: ../../public/index.php?page=home');
 		} catch (PDOException $e) {
-			header('location: ../../public/index.php?page=home.php&error=' . $e->getMessage());
+			$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
+
+			// Redirect to homepage
+			header('location: ../../public/index.php?page=home');
+		} catch (Exception $e) {
+			$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
+
+			// Redirect to homepage
+			header('location: ../../public/index.php?page=home');
 		} finally {
 			// Destroy the database connection
 			$conn = null;

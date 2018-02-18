@@ -1,30 +1,45 @@
 <?php
 
+	// Load user session
+	session_start();
+
 	// Load application files
 	require_once "../autoload.php";
 
-	session_start();
-
-	if (isset($_POST['quote'])) {
+	if (isset($_POST["quote"])) {
 		// Gets post
-		$quote = htmlentities(trim($_POST['quote']));
+		$quote = trim($_POST["quote"]);
 		// Gets the user id
 		$id = (int) $_SESSION["id"];
+		// Date of created
+		$date = date('Y-m-d');
+		// Time of created
+		$time = date('H:i:s');
 
 		// Gets the database connection
 		$conn = getConnection();
 
 		try {
 			// Adds the publication in the database
-			$stmt = $conn->prepare("INSERT INTO QUOTES(QUOTE, ID_USER) VALUES(:quote, :id)");
+			$stmt = $conn->prepare("INSERT INTO QUOTES (QUOTE, POST_DATE, POST_TIME, ID_USER) VALUES (:quote, :postdate, :posttime, :id)");
 			$stmt->bindParam(":quote", $quote);
+			$stmt->bindParam(":postdate", $date);
+			$stmt->bindParam(":posttime", $time);
 			$stmt->bindParam(":id", $id);
 			$stmt->execute();
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home.php');
+			header('location: ../../public/index.php?page=home');
 		} catch (PDOException $e) {
-			header('location: ../../public/index.php?page=home.php&error=' . $e->getMessage());
+			$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
+
+			// Redirect to homepage
+			header('location: ../../public/index.php?page=home');
+		} catch (Exception $e) {
+			$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
+
+			// Redirect to homepage
+			header('location: ../../public/index.php?page=home');
 		} finally {
 			// Destroy the database connection
 			$conn = null;

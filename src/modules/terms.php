@@ -3,7 +3,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<h1>Terms of Service</h1>
 			<h2>Terms</h2>
-			<p>By accessing the website at <a href="https://fav-quote.000webhostapp.com/">https://fav-quote.000webhostapp.com/</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.</p>
+			<p>By accessing the website at <a href="http://fav-quote.byethost17.com">http://fav-quote.byethost17.com</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.</p>
 			<h2>Accounts</h2>
 			<p>When you create an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.</p>
 			<p>You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password, whether your password is with our Service or a third-party service.</p>
