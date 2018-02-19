@@ -66,78 +66,80 @@
                         </div>
 
                         <!-- publications -->
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>QUOTE</th>
-                                    <th>DATE</th>
-                                    <th>TIME</th>
-                                    <th>LIKES</th>
-                                    <th>VOTE</th>
-                                </tr>
-                            </thead>
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>QUOTE</th>
+										<th>DATE</th>
+										<th>TIME</th>
+										<th>LIKES</th>
+										<th>VOTE</th>
+									</tr>
+								</thead>
 
-							<?php
+								<?php
 
-							// Gets the database connection
-							$conn = getConnection();
+								// Gets the database connection
+								$conn = getConnection();
 
-							try {
-								// Gets the publications
-								$stmt = $conn->prepare("SELECT ID_QUOTE AS id, QUOTE AS quote, POST_DATE AS postdate, POST_TIME AS posttime, LIKES AS likes FROM QUOTES WHERE ID_USER = :id ORDER BY postdate DESC");
-								$stmt->bindParam(":id", $id);
-								$stmt->execute();
-								$query = $stmt->fetchAll();
+								try {
+									// Gets the publications
+									$stmt = $conn->prepare("SELECT ID_QUOTE AS id, QUOTE AS quote, POST_DATE AS postdate, POST_TIME AS posttime, LIKES AS likes FROM QUOTES WHERE ID_USER = :id ORDER BY postdate DESC");
+									$stmt->bindParam(":id", $id);
+									$stmt->execute();
+									$query = $stmt->fetchAll();
 
-								// If publications exist
-								if ($query) {
-									// Gets publications in a Json Array
-									$items = json_encode($query);
+									// If publications exist
+									if ($query) {
+										// Gets publications in a Json Array
+										$items = json_encode($query);
 
-									?>
+										?>
 
-                                    <tbody>
-                                        <!-- Go through the items that matches with the search -->
-                                        <tr v-for="item in search">
-                                            <!-- If user is owner of post then strong text -->
-                                            <td>{{ item.quote }}</td>
-                                            <!-- date of post -->
-                                            <td>{{ item.postdate }}</td>
-                                            <!-- time of post -->
-                                            <td>{{ item.posttime }}</td>
-                                            <!-- # of likes -->
-                                            <td>{{ item.likes }}</td>
-                                            <!-- I the user voted then button 'like' -->
-                                            <td v-if="!contains(item.id)"><a v-bind:href="'../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
-                                            <!-- I the user voted then button 'unlike' -->
-                                            <td v-if="contains(item.id)"><a v-bind:href="'../src/modules/unlike.php?id=' + item.id" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></a></td>
-                                        </tr>
-                                    </tbody>
+										<tbody>
+											<!-- Go through the items that matches with the search -->
+											<tr v-for="item in search">
+												<!-- If user is owner of post then strong text -->
+												<td>{{ item.quote }}</td>
+												<!-- date of post -->
+												<td>{{ item.postdate }}</td>
+												<!-- time of post -->
+												<td>{{ item.posttime }}</td>
+												<!-- # of likes -->
+												<td>{{ item.likes }}</td>
+												<!-- I the user voted then button 'like' -->
+												<td v-if="!contains(item.id)"><a v-bind:href="'../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
+												<!-- I the user voted then button 'unlike' -->
+												<td v-if="contains(item.id)"><a v-bind:href="'../src/modules/unlike.php?id=' + item.id" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></a></td>
+											</tr>
+										</tbody>
 
-									<?php
+										<?php
 
-								} else {
-									// No post were finds
-									echo "<tbody><td class='danger' colspan='5' align='center'>No results were obtained</td></tbody>";
+									} else {
+										// No post were finds
+										echo "<tbody><td class='danger' colspan='5' align='center'>No results were obtained</td></tbody>";
+									}
+								} catch (PDOException $e) {
+									$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
+
+									// Redirect to homepage
+									header('location: ../../public/index.php?page=home');
+								} catch (Exception $e) {
+									$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
+
+									// Redirect to homepage
+									header('location: ../../public/index.php?page=home');
+								} finally {
+									// Destroy the database connection
+									$conn = null;
 								}
-							} catch (PDOException $e) {
-								$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
-								// Redirect to homepage
-								header('location: ../../public/index.php?page=home');
-							} catch (Exception $e) {
-								$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
+								?>
 
-								// Redirect to homepage
-								header('location: ../../public/index.php?page=home');
-							} finally {
-								// Destroy the database connection
-								$conn = null;
-							}
-
-							?>
-
-						</table>
+							</table>
+						</div>
                     </div>
                 </form>
             </div>
