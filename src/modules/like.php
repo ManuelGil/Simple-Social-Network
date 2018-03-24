@@ -27,7 +27,7 @@
 				$stmt->execute();
 
 				// Adds the publication id into the voted publications
-				array_push($_SESSION["voted"], $quote);
+				$_SESSION["voted"][] = $quote;
 			}
 
 			// Redirect to homepage

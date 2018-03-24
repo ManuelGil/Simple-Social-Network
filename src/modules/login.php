@@ -37,10 +37,8 @@
 					$stmt->execute();
 					$array = $stmt->fetchAll();
 
-					$_SESSION["voted"] = array();
-
 					foreach ($array as $key => $value) {
-						array_push($_SESSION["voted"], $value["ID_QUOTE"]);
+						$_SESSION["voted"][] = $value["ID_QUOTE"];
 					}
 
 					// Redirect to homepage

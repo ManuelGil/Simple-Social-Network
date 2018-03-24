@@ -26,9 +26,11 @@
 				$stmt->bindParam(":id", $quote);
 				$stmt->execute();
 
-				foreach (array_keys($_SESSION["voted"], $quote) as $key) {
-					// Removes the publication id into the voted publications
-					unset($_SESSION["voted"][$key]);
+				foreach ($_SESSION["voted"] as $key => $value) {
+					if ($value == $quote) {
+						// Removes the publication id into the voted publications
+						$_SESSION["voted"][$key] = null;
+					}
 				}
 			}
 

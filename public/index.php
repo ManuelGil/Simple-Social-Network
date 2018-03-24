@@ -21,6 +21,13 @@
 
 		<!-- import bootstrap 3 -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<style>
+			.modal .modal-body {
+				max-height: 420px;
+				overflow-y: auto;
+			}
+		</style>
 	</head>
 	<body>
 
@@ -109,7 +116,7 @@
 
 		<div class="footer-copyright">
 			<div class="container">
-				<p class="text-muted credit text-center">&copy; <?= date('Y') ?> <a href="https://github.com/ManuelGil/Simple-Social-Network" title="">Fav Quote</a> / <a href="index.php?page=terms">Terms of Service</a></p>
+				<p class="text-muted credit text-center">&copy; <?= date('Y') ?> <a href="https://manuelgil.github.io/Simple-Social-Network" title="">Fav Quote</a> / <a href="index.php?page=terms">Terms of Service</a></p>
 			</div>
 		</div>
 

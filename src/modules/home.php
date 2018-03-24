@@ -28,7 +28,7 @@
 
 					<!-- Object #table binded with the 'loadTable' function -->
 					<div id="table" class="form-group lg">
-						<div class="form-group lg">
+						<div class="form-group">
 							<!-- Search text -->
 							<div class="input-group pull-right">
 								<input type="text" v-model="quote" v-if="items.length" name="search" id="search" class="form-control" placeholder="Search">
@@ -37,7 +37,7 @@
 
 						<!-- publications -->
 						<div class="table-responsive">
-							<table class="table table-hover">
+						    <table class="table table-hover">
 								<thead>
 									<tr>
 										<th>USER</th>
@@ -62,8 +62,30 @@
 
 									// If publications exist
 									if ($query) {
+										foreach ($query as $key => $value) {
+											$obj = new stdClass();
+											$obj->id = $value['id'];
+											$obj->quote = $value['quote'];
+											$obj->postdate = $value['postdate'];
+											$obj->posttime = $value['posttime'];
+											$obj->likes = $value['likes'];
+
+											// $obj->id = $value['ID_QUOTE'];
+											$stmt = $conn->prepare("SELECT U.GUID AS guid, U.USERNAME AS user FROM LIKES AS L, USERS AS U WHERE L.ID_USER = U.ID_USER AND L.ID_QUOTE = :id_quote");
+											$stmt->bindParam(':id_quote', $value['id']);
+											$stmt->execute();
+											$users = $stmt->fetchAll();
+
+											$obj->users = $users;
+
+											$obj->guid = $value['guid'];
+											$obj->user = $value['user'];
+
+											$list[] = $obj;
+										}
+
 										// Gets publications in a Json Array
-										$items = json_encode($query);
+										$items = json_encode($list);
 
 										?>
 
@@ -81,7 +103,24 @@
 												<!-- time of post -->
 												<td>{{ item.posttime }}</td>
 												<!-- # of likes -->
-												<td>{{ item.likes }}</td>
+												<td>
+													<a  data-toggle="modal" v-bind:data-target="'#users-' + item.id" style="cursor: pointer;">{{ item.likes }}</a>
+													<div class="modal fade" v-bind:id="'users-' + item.id" role="dialog">
+														<div class="modal-dialog modal-sm">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">Likes</h4>
+																</div>
+																<div class="modal-body" style="padding: 0;">
+																	<ul class="list-group">
+																		<li class="list-group-item" v-for="user in item.users"><a v-bind:href="'index.php?page=profile&guid=' + user.guid">@{{ user.user }}</a></li>
+																	</ul>
+																</div>
+															</div>
+														</div>
+													</div>
+												</td>
 												<!-- I the user voted then button 'like' -->
 												<td v-if="!contains(item.id)"><a v-bind:href="'../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
 												<!-- I the user voted then button 'unlike' -->

@@ -69,7 +69,7 @@
 				methods: {
 					load: function () {
 						this.items = <?= $items ?>, // Load the items array
-								this.votes = <?= $votes ?> // Load the voted publications
+						this.votes = <?= $votes ?> // Load the voted publications
 					},
 					contains: function (key) {
 						for (var i = 0; i < this.votes.length; i++) { // Go through the array of voted publications

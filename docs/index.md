@@ -7,10 +7,10 @@
 		<img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Status">
 	</a>
 	<a href="#changelog">
-		<img src="https://img.shields.io/badge/release-v1.0.0--beta.3-yellow.svg" alt="Version">
+		<img src="https://img.shields.io/badge/release-v1.0.0--beta.4-yellow.svg" alt="Version">
 	</a>
 	<a href="#changelog">
-		<img src="https://img.shields.io/badge/update-february-yellowgreen.svg" alt="Update">
+		<img src="https://img.shields.io/badge/update-march-yellowgreen.svg" alt="Update">
 	</a>
 	<a href="#license">
 		<img src="https://img.shields.io/badge/license-MIT%20License-green.svg" alt="License">
@@ -156,6 +156,70 @@ You can test a demo websites [here](http://fav-quote.byethost17.com).
 <a name="changelog"></a>
 ## Changelog
 
+**1.0.0-beta.4** (03/24/2018)
+
+  * <table border="0" cellpadding="4">
+		<tr>
+			<td>
+				<strong>Language:</strong>
+			</td>
+			<td>
+				HTML, PHP, JavaScript
+			</td>
+		</tr>
+		<tr>
+			<td><strong>
+				Requirements:
+			</strong></td>
+			<td>
+				<ul>
+					<li>
+						PHP 5.6
+					</li>
+					<li>
+						MySQL or MariaDB 
+					</li>
+					<li>
+						Apache Server
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>
+				Features:
+			</strong></td>
+			<td>
+				<ul>
+					<li>
+						<a href="https://getbootstrap.com/docs/3.3/getting-started/">Bootstrap 3</a>
+					</li>
+					<li>
+						<a href="http://1000hz.github.io/bootstrap-validator/">Validator for Bootstrap 3</a>
+					</li>
+					<li>
+						<a href="https://vuejs.org/v2/guide/installation.html">Vue.JS 2</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>Changes:</strong>
+			</td>
+			<td>
+				<ul>
+					<li>
+						Show user for likes
+					</li>
+					<li>
+						Check the unlike process
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
 **1.0.0-beta.3** (02/18/2018)
 
   * <table border="0" cellpadding="4">
@@ -210,13 +274,13 @@ You can test a demo websites [here](http://fav-quote.byethost17.com).
 			<td>
 				<ul>
 					<li>
-						Add a new table to save likes
+						Add a new table in database to save likes
 					</li>
 					<li>
 						Add the profile page
 					</li>
 					<li>
-						Add the location for person
+						Add the location for the persons
 					</li>
 				</ul>
 			</td>
