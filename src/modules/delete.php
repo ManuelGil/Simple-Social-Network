@@ -30,17 +30,17 @@
 			}
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home');
+			header('location: ../../public/home');
 		} catch (PDOException $e) {
 			$_SESSION["message"] = "<strong>DataBase Error</strong>: The post could not be deleted.<br>" . $e->getMessage();
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home');
+			header('location: ../../public/home');
 		} catch (Exception $e) {
 			$_SESSION["message"] = "<strong>General Error</strong>: The post could not be deleted.<br>" . $e->getMessage();
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home');
+			header('location: ../../public/home');
 		} finally {
 			// Destroy the database connection
 			$conn = null;

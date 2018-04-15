@@ -30,7 +30,7 @@
 
 				<div class="form-group in">
 					<input type="submit" name="signin" id="submit" class="btn btn-lg btn-primary btn-block" value="Sign in"><br>
-					<a href="index.php?page=register" class="btn btn-lg btn-primary btn-block">Sing up</a>
+					<a href="<?= $baseUrl; ?>/register" class="btn btn-lg btn-primary btn-block">Sing up</a>
 				</div>
 
 			</form>

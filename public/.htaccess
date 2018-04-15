@@ -10,9 +10,11 @@
     RewriteEngine On
     RewriteBase /
 
-    RewriteCond %{REQUEST_FILENAME} -d [OR]
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^/]+)$ Simple-Social-Network/public/index.php?page=$1 [L]
 
-    RewriteRule ^([^/]*)$ /index.php?page=$1 [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^/]+)/([^/]+)$ Simple-Social-Network/public/index.php?page=$1&guid=$2 [L]
 </IfModule>

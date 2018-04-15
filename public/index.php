@@ -1,5 +1,13 @@
 <?php
 
+	$baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+
+	$baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . $baseDir;
+
+	$baseUrl = substr($baseUrl, 0, -1);
+
+	define('BASE_URL', $baseUrl);
+
 	// Load user session
 	session_start();
 
@@ -22,6 +30,8 @@
 		<!-- import bootstrap 3 -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+	  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<style>
 			.modal .modal-body {
 				max-height: 420px;
@@ -42,9 +52,9 @@
 							if (isset($_SESSION["login"])) {
 								// Gets the username
 								$user = $_SESSION["user"];
-								echo "<a class='navbar-brand' href='index.php?page=home'>Home</a>"; // Show the username
+								echo "<a class='navbar-brand' href='$baseUrl/home'>Home</a>"; // Show the username
 							} else {
-								echo "<a class='navbar-brand' href='index.php'>Home</a>"; // Show the username
+								echo "<a class='navbar-brand' href='$baseUrl'>Home</a>"; // Show the username
 							}
 							?>
 						</div>
@@ -53,23 +63,41 @@
 							// If user is logged
 							if (isset($_SESSION["login"])) {
 								$guid = $_SESSION["guid"];
-								?>
 
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-										@<?= $user; ?><span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu" role="menu">
-										<li>
-											<a href="index.php?page=profile&guid=<?= $guid; ?>"><span class="glyphicon glyphicon-user"></span> Profile</a>
-										</li>
-										<li>
-											<a href="../src/modules/exit.php"><span class="glyphicon glyphicon-log-out"></span> Quit</a>
-										</li>
-									</ul>
-								</li>
+								if (strpos($_SERVER['REQUEST_URI'], 'profile') !== false) {
+									?>
 
-								<?php
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+											@<?= $user; ?><span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a href="../../src/modules/exit.php"><span class="glyphicon glyphicon-log-out"></span> Quit</a>
+											</li>
+										</ul>
+									</li>
+
+									<?php
+								} else {
+									?>
+
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+											@<?= $user; ?><span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a href="<?= $baseUrl; ?>/profile/<?= $guid; ?>"><span class="glyphicon glyphicon-user"></span> Profile</a>
+											</li>
+											<li>
+												<a href="../src/modules/exit.php"><span class="glyphicon glyphicon-log-out"></span> Quit</a>
+											</li>
+										</ul>
+									</li>
+
+									<?php
+								}
 							}
 							?>
 
@@ -116,7 +144,7 @@
 
 		<div class="footer-copyright">
 			<div class="container">
-				<p class="text-muted credit text-center">&copy; <?= date('Y') ?> <a href="https://manuelgil.github.io/Simple-Social-Network" title="">Fav Quote</a> / <a href="index.php?page=terms">Terms of Service</a></p>
+				<p class="text-muted credit text-center">&copy; <?= date('Y') ?> <a href="https://manuelgil.github.io/Simple-Social-Network" title="">Fav Quote</a> / <a href="<?= $baseUrl; ?>/terms">Terms of Service</a></p>
 			</div>
 		</div>
 

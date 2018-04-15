@@ -73,12 +73,12 @@
 					</div>
 
 					<div class="form-group lg">
-						<input type="checkbox" name="checkbox" id="agree" value="check"> I agree to the <a href="index.php?page=terms">Terms of Service</a>
+						<input type="checkbox" name="checkbox" id="agree" value="check"> I agree to the <a href="<?= $baseUrl; ?>/terms">Terms of Service</a>
 					</div>
 
 					<div class="form-group in">
 						<input type="submit" name="signup" id="submit" class="btn btn-lg btn-primary btn-block" value="Sign up"><br>
-						<a href="index.php" class="btn btn-lg btn-primary btn-block">Back to login</a>
+						<a href="<?= $baseUrl; ?>" class="btn btn-lg btn-primary btn-block">Back to login</a>
 					</div>
 
 				</form>

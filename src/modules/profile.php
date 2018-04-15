@@ -1,5 +1,7 @@
 <?php
 
+	defined('BASE_URL') OR exit('No direct script access allowed');
+
 	// If user is logged
 	if (isset($_SESSION["login"])) {
 		// Gets the username
@@ -85,15 +87,37 @@
 
 								try {
 									// Gets the publications
-									$stmt = $conn->prepare("SELECT ID_QUOTE AS id, QUOTE AS quote, POST_DATE AS postdate, POST_TIME AS posttime, LIKES AS likes FROM QUOTES WHERE ID_USER = :id ORDER BY postdate DESC");
+									$stmt = $conn->prepare("SELECT Q.ID_QUOTE AS id, Q.QUOTE AS quote, Q.POST_DATE AS postdate, Q.POST_TIME AS posttime, Q.LIKES AS likes, U.GUID AS guid, U.USERNAME AS user FROM QUOTES AS Q, USERS AS U WHERE Q.ID_USER = U.ID_USER ORDER BY likes DESC");
 									$stmt->bindParam(":id", $id);
 									$stmt->execute();
 									$query = $stmt->fetchAll();
 
 									// If publications exist
 									if ($query) {
+										foreach ($query as $key => $value) {
+											$obj = new stdClass();
+											$obj->id = $value['id'];
+											$obj->quote = $value['quote'];
+											$obj->postdate = $value['postdate'];
+											$obj->posttime = $value['posttime'];
+											$obj->likes = $value['likes'];
+
+											// $obj->id = $value['ID_QUOTE'];
+											$stmt = $conn->prepare("SELECT U.GUID AS guid, U.USERNAME AS user FROM LIKES AS L, USERS AS U WHERE L.ID_USER = U.ID_USER AND L.ID_QUOTE = :id_quote");
+											$stmt->bindParam(':id_quote', $value['id']);
+											$stmt->execute();
+											$users = $stmt->fetchAll();
+
+											$obj->users = $users;
+
+											$obj->guid = $value['guid'];
+											$obj->user = $value['user'];
+
+											$list[] = $obj;
+										}
+
 										// Gets publications in a Json Array
-										$items = json_encode($query);
+										$items = json_encode($list);
 
 										?>
 
@@ -107,11 +131,28 @@
 												<!-- time of post -->
 												<td>{{ item.posttime }}</td>
 												<!-- # of likes -->
-												<td>{{ item.likes }}</td>
+												<td>
+													<a  data-toggle="modal" v-bind:data-target="'#users-' + item.id" style="cursor: pointer;">{{ item.likes }}</a>
+													<div class="modal fade" v-bind:id="'users-' + item.id" role="dialog">
+														<div class="modal-dialog modal-sm">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">Likes</h4>
+																</div>
+																<div class="modal-body" style="padding: 0;">
+																	<ul class="list-group">
+																		<li class="list-group-item" v-for="user in item.users"><a v-bind:href="'<?= $baseUrl; ?>/profile/' + user.guid">@{{ user.user }}</a></li>
+																	</ul>
+																</div>
+															</div>
+														</div>
+													</div>
+												</td>
 												<!-- I the user voted then button 'like' -->
-												<td v-if="!contains(item.id)"><a v-bind:href="'../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
+												<td v-if="!contains(item.id)"><a v-bind:href="'../../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
 												<!-- I the user voted then button 'unlike' -->
-												<td v-if="contains(item.id)"><a v-bind:href="'../src/modules/unlike.php?id=' + item.id" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></a></td>
+												<td v-if="contains(item.id)"><a v-bind:href="'../../src/modules/unlike.php?id=' + item.id" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></a></td>
 											</tr>
 										</tbody>
 
@@ -125,12 +166,12 @@
 									$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
 									// Redirect to homepage
-									header('location: ../../public/index.php?page=home');
+									header('location: ../../public/home');
 								} catch (Exception $e) {
 									$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
 									// Redirect to homepage
-									header('location: ../../public/index.php?page=home');
+									header('location: ../../public/home');
 								} finally {
 									// Destroy the database connection
 									$conn = null;
@@ -154,7 +195,13 @@
 
 		// If var items is defined then call Vue.js 'loadTable'
 		if (isset($items)) {
-			loadTable($items, json_encode($_SESSION["voted"]));
+			if (isset($_SESSION["voted"])) {
+				$voted = json_encode($_SESSION["voted"]);
+				loadTable($items, $voted);
+			} else {
+				$voted = json_encode([]);
+				loadTable($items, $voted);
+			}
 		}
 	} else {
 		$_SESSION["message"] = "Please login";

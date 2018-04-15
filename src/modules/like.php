@@ -31,17 +31,17 @@
 			}
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home');
+			header('location: ../../public/home');
 		} catch (PDOException $e) {
 			$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home');
+			header('location: ../../public/home');
 		} catch (Exception $e) {
 			$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
 			// Redirect to homepage
-			header('location: ../../public/index.php?page=home');
+			header('location: ../../public/home');
 		} finally {
 			// Destroy the database connection
 			$conn = null;

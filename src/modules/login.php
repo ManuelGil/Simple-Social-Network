@@ -42,7 +42,7 @@
 					}
 
 					// Redirect to homepage
-					header('location: ../../public/index.php?page=home');
+					header('location: ../../public/home');
 				} else {
 					// Password wrong
 					$_SESSION["message"] = "The password you have entered is wrong.";
@@ -105,12 +105,12 @@
 			$_SESSION["message"] = "<strong>DataBase Error</strong>: The user could not be created.<br>" . $e->getMessage();
 
 			// Redirect to index
-			header('location: ../../public/index.php?page=register');
+			header('location: ../../public/register');
 		} catch (Exception $e) {
 			$_SESSION["message"] = "<strong>General Error</strong>: The user could not be created.<br>" . $e->getMessage();
 
 			// Redirect to index
-			header('location: ../../public/index.php?page=register');
+			header('location: ../../public/register');
 		} finally {
 			// Destroy the database connection
 			$conn = null;

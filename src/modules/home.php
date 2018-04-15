@@ -1,5 +1,7 @@
 <?php
 
+	defined('BASE_URL') OR exit('No direct script access allowed');
+
 	// If user is logged
 	if (isset($_SESSION["login"])) {
 		// Gets the username
@@ -13,7 +15,7 @@
 				<form class="form-horizontal" name="app" id="app" method="post" action="../src/modules/post.php">
 
 					<!-- Object #text binded with the 'letterCount' function -->
-					<div id="text" class="form-group lg">
+					<div id="text" class="form-group">
 						<div class="input-group">
 							<!-- bind text entry with Vue.js Attribute 'quote' -->
 							<textarea v-model="quote" name="quote" id="quote" class="form-control custom-control" rows="3" maxlength="120" style="resize:none" placeholder="Quote" autofocus></textarea>
@@ -93,7 +95,7 @@
 											<!-- Go through the items that matches with the search -->
 											<tr v-for="item in search">
 												<!-- Show username -->
-												<td><a v-bind:href="'index.php?page=profile&guid=' + item.guid">@{{ item.user }}</a></td>
+												<td><a v-bind:href="'<?= $baseUrl; ?>/profile/' + item.guid">@{{ item.user }}</a></td>
 												<!-- If user is owner of post then strong text -->
 												<th v-if="item.user == '<?= $user ?>'">{{ item.quote }}</th>
 												<!-- If user isn't owner of post then simple text -->
@@ -114,7 +116,7 @@
 																</div>
 																<div class="modal-body" style="padding: 0;">
 																	<ul class="list-group">
-																		<li class="list-group-item" v-for="user in item.users"><a v-bind:href="'index.php?page=profile&guid=' + user.guid">@{{ user.user }}</a></li>
+																		<li class="list-group-item" v-for="user in item.users"><a v-bind:href="'<?= $baseUrl; ?>/profile/' + user.guid">@{{ user.user }}</a></li>
 																	</ul>
 																</div>
 															</div>
@@ -140,12 +142,12 @@
 									$_SESSION["message"] = "<strong>DataBase Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
 									// Redirect to homepage
-									header('location: ../../public/index.php?page=home');
+									header('location: ../../public/home');
 								} catch (Exception $e) {
 									$_SESSION["message"] = "<strong>General Error</strong>: No results were obtained.<br>" . $e->getMessage();
 
 									// Redirect to homepage
-									header('location: ../../public/index.php?page=home');
+									header('location: ../../public/home');
 								} finally {
 									// Destroy the database connection
 									$conn = null;
@@ -169,7 +171,13 @@
 
 		// If var items is defined then call Vue.js 'loadTable'
 		if (isset($items)) {
-			loadTable($items, json_encode($_SESSION["voted"]));
+			if (isset($_SESSION["voted"])) {
+				$voted = json_encode($_SESSION["voted"]);
+				loadTable($items, $voted);
+			} else {
+				$voted = json_encode([]);
+				loadTable($items, $voted);
+			}
 		}
 	} else {
 		$_SESSION["message"] = "Please login";
