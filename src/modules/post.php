@@ -21,7 +21,9 @@
 
 		try {
 			// Adds the publication in the database
-			$stmt = $conn->prepare("INSERT INTO QUOTES (QUOTE, POST_DATE, POST_TIME, ID_USER) VALUES (:quote, :postdate, :posttime, :id)");
+			$sql = "INSERT INTO	QUOTES (QUOTE, POST_DATE, POST_TIME, ID_USER)
+					VALUES		(:quote, :postdate, :posttime, :id);";
+			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":quote", $quote);
 			$stmt->bindParam(":postdate", $date);
 			$stmt->bindParam(":posttime", $time);

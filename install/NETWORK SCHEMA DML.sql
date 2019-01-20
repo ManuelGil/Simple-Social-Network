@@ -2,6 +2,13 @@
 -- Model: NETWORK    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, AUTOCOMMIT=0;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+START TRANSACTION;
+
 -- -----------------------------------------------------
 -- Schema NETWORK
 -- -----------------------------------------------------
@@ -9,7 +16,6 @@
 -- -----------------------------------------------------
 -- Schema NETWORK
 -- -----------------------------------------------------
-START TRANSACTION;
 USE `NETWORK` ;
 
 -- -----------------------------------------------------
@@ -260,8 +266,9 @@ INSERT INTO `NETWORK`.`COUNTRIES` (`ID_COUNTRY`, `ISO`, `COUNTRY`) VALUES
 -- -----------------------------------------------------
 -- Dumping data for table `NETWORK`.`USERS`
 -- -----------------------------------------------------
-INSERT INTO `NETWORK`.`USERS` (`ID_USER`, `GUID`, `USERNAME`, `PASSWORD`, `CREATED_AT`, `ID_COUNTRY`) VALUES
-(0, '', 'ManuelGil', '', '2018-01-01', 1);
+INSERT INTO `users` (`ID_USER`, `GUID`, `TOKEN`, `USERNAME`, `PASSWORD`, `CREATED_AT`, `STATUS`, `ID_COUNTRY`) VALUES
+(0, '5acff05a49592', NULL, 'ManuelGil', '', '2018-01-01', 1, 47),
+(1, '5ba4524f296c3', NULL, 'testUser', '$2y$10$dRWUrwXE56p3zvEadmnMYeFivd6aU9BfGb4LXsmf5p.xQlkTAX/V6', '2018-01-01', 1, 1);
 
 
 -- -----------------------------------------------------
@@ -270,6 +277,8 @@ INSERT INTO `NETWORK`.`USERS` (`ID_USER`, `GUID`, `USERNAME`, `PASSWORD`, `CREAT
 INSERT INTO `NETWORK`.`QUOTES` (`ID_QUOTE`, `QUOTE`, `POST_DATE`, `POST_TIME`, `LIKES`, `ID_USER`) VALUES
 (0, 'Fav Quote is a Micro Social Network with PHP, MySQL, Bootstrap 3 and Vue.JS 2. It don\'t use classes or a php framework.', '2018-01-01', '00:00:00', 1, 0);
 
-
 COMMIT;
 
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

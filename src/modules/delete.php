@@ -15,12 +15,16 @@
 
 		try {
 			// Deletes the publication in the database
-			$stmt = $conn->prepare("DELETE FROM LIKES WHERE ID_QUOTE = :id");
+			$sql = "DELETE FROM	LIKES
+					WHERE		ID_QUOTE = :id;";
+			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":id", $id);
 			$result = $stmt->execute();
 
 			if ($result) {
-				$stmt = $conn->prepare("DELETE FROM QUOTES WHERE ID_QUOTE = :id");
+				$sql = "DELETE FROM	QUOTES
+						WHERE		ID_QUOTE = :id;";
+				$stmt = $conn->prepare($sql);
 				$stmt->bindParam(":id", $id);
 				$result = $stmt->execute();
 			}

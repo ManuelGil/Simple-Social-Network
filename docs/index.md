@@ -7,18 +7,18 @@
 		<img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Status">
 	</a>
 	<a href="#changelog">
-		<img src="https://img.shields.io/badge/release-v1.0.0--beta.5-yellow.svg" alt="Version">
+		<img src="https://img.shields.io/badge/release-v1.0.0--beta.6-yellow.svg" alt="Version">
 	</a>
 	<a href="#changelog">
-		<img src="https://img.shields.io/badge/update-april-yellowgreen.svg" alt="Update">
+		<img src="https://img.shields.io/badge/update-january-yellowgreen.svg" alt="Update">
 	</a>
 	<a href="#license">
 		<img src="https://img.shields.io/badge/license-MIT%20License-green.svg" alt="License">
 	</a>
 </div>
 
-Fav Quote is a Micro Social Network developed in PHP, MySQL (PDO_MYSQL Controller for the connection),
- Bootstrap 3 and Vue.JS 2. This project don't use classes or a php framework.
+[Fav Quote](http://fav-quote.byethost17.com) is a Micro Social Network developed in PHP, MySQL
+ (PDO_MYSQL Controller for the connection), Bootstrap 3 and Vue.JS 2. This project don't use classes or a php framework.
 
 To validate the login forms uses the [validator for bootstrap](http://1000hz.github.io/bootstrap-validator/)
 
@@ -145,8 +145,8 @@ ENGINE = InnoDB;
 <a name="built"></a>
 ## Built With
 
-  * XAMPP ([XAMPP for Windows 5.6.32](https://www.apachefriends.org/download.html))
-  * ATOM ([ATOM](https://atom.io/))
+  * XAMPP for Windows 5.6.32 ([XAMPP](https://www.apachefriends.org/download.html))
+  * Visual Studio Code ([VSCode](https://code.visualstudio.com/))
 
 <a name="test"></a>
 ## Running the tests
@@ -155,6 +155,67 @@ You can test a demo websites [here](http://fav-quote.byethost17.com).
 
 <a name="changelog"></a>
 ## Changelog
+
+**1.0.0-beta.6** (01/19/2019)
+
+  * <table border="0" cellpadding="4">
+		<tr>
+			<td>
+				<strong>Language:</strong>
+			</td>
+			<td>
+				HTML, PHP, JavaScript
+			</td>
+		</tr>
+		<tr>
+			<td><strong>
+				Requirements:
+			</strong></td>
+			<td>
+				<ul>
+					<li>
+						PHP 5.6
+					</li>
+					<li>
+						MySQL or MariaDB 
+					</li>
+					<li>
+						Apache Server
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>
+				Features:
+			</strong></td>
+			<td>
+				<ul>
+					<li>
+						<a href="https://getbootstrap.com/docs/3.3/getting-started/">Bootstrap 3</a>
+					</li>
+					<li>
+						<a href="http://1000hz.github.io/bootstrap-validator/">Validator for Bootstrap 3</a>
+					</li>
+					<li>
+						<a href="https://vuejs.org/v2/guide/installation.html">Vue.JS 2</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>Changes:</strong>
+			</td>
+			<td>
+				<ul>
+					<li>
+						Pagination in Vue.js
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
 
 **1.0.0-beta.5** (04/15/2018)
 

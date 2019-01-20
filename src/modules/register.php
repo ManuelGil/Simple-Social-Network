@@ -5,7 +5,12 @@
 
 	try {
 		// Gets the countries
-		$stmt = $conn->prepare("SELECT ID_COUNTRY AS id, ISO AS iso, COUNTRY AS country FROM COUNTRIES ORDER BY iso ASC");
+		$sql = "SELECT		ID_COUNTRY AS id,
+							ISO AS iso,
+							COUNTRY AS country
+				FROM		COUNTRIES
+				ORDER BY	iso ASC;";
+		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(":id", $id);
 		$stmt->execute();
 		$query = $stmt->fetchAll();

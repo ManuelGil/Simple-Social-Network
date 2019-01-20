@@ -16,7 +16,10 @@
 
 		try {
 			// Gets the user into the database
-			$stmt = $conn->prepare("SELECT * FROM USERS WHERE USERNAME = :user");
+			$sql = "SELECT	*
+					FROM	USERS
+					WHERE	USERNAME = :user;";
+			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":user", $user);
 			$stmt->execute();
 			$query = $stmt->fetchObject();
@@ -32,7 +35,10 @@
 					$_SESSION["guid"] = $query->GUID;
 					$_SESSION["user"] = $query->USERNAME;
 
-					$stmt = $conn->prepare("SELECT * FROM LIKES WHERE ID_USER = :id");
+					$sql = "SELECT	*
+							FROM	LIKES
+							WHERE	ID_USER = :id;";
+					$stmt = $conn->prepare($sql);
 					$stmt->bindParam(":id", $id);
 					$stmt->execute();
 					$array = $stmt->fetchAll();
@@ -87,7 +93,9 @@
 
 		try {
 			// Sets the user into the database
-			$stmt = $conn->prepare("INSERT INTO USERS(GUID, USERNAME, PASSWORD, CREATED_AT, ID_COUNTRY) VALUES(:guid, :user, :pass, :created, :country)");
+			$sql = "INSERT INTO	USERS(GUID, USERNAME, PASSWORD, CREATED_AT, ID_COUNTRY)
+					VALUES		(:guid, :user, :pass, :created, :country);";
+			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":guid", $guid);
 			$stmt->bindParam(":user", $user);
 			$stmt->bindParam(":pass", $pass);

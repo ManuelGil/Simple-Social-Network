@@ -58,7 +58,18 @@
 
 								try {
 									// Gets the publications
-									$stmt = $conn->prepare("SELECT Q.ID_QUOTE AS id, Q.QUOTE AS quote, Q.POST_DATE AS postdate, Q.POST_TIME AS posttime, Q.LIKES AS likes, U.GUID AS guid, U.USERNAME AS user FROM QUOTES AS Q, USERS AS U WHERE Q.ID_USER = U.ID_USER ORDER BY likes DESC");
+									$sql = "SELECT		Q.ID_QUOTE AS id,
+														Q.QUOTE AS quote,
+														Q.POST_DATE AS postdate,
+														Q.POST_TIME AS posttime,
+														Q.LIKES AS likes,
+														U.GUID AS guid,
+														U.USERNAME AS user
+											FROM		QUOTES AS Q
+											INNER JOIN	USERS AS U 
+													ON	Q.ID_USER = U.ID_USER
+											ORDER BY	likes DESC;";
+									$stmt = $conn->prepare($sql);
 									$stmt->execute();
 									$query = $stmt->fetchAll();
 
@@ -73,7 +84,13 @@
 											$obj->likes = $value['likes'];
 
 											// $obj->id = $value['ID_QUOTE'];
-											$stmt = $conn->prepare("SELECT U.GUID AS guid, U.USERNAME AS user FROM LIKES AS L, USERS AS U WHERE L.ID_USER = U.ID_USER AND L.ID_QUOTE = :id_quote");
+											$sql = "SELECT		U.GUID AS guid,
+																U.USERNAME AS user
+													FROM		LIKES AS L
+													INNER JOIN	USERS AS U
+															ON	L.ID_USER = U.ID_USER
+													WHERE		L.ID_QUOTE = :id_quote;";
+											$stmt = $conn->prepare($sql);
 											$stmt->bindParam(':id_quote', $value['id']);
 											$stmt->execute();
 											$users = $stmt->fetchAll();
@@ -93,42 +110,44 @@
 
 										<tbody>
 											<!-- Go through the items that matches with the search -->
-											<tr v-for="item in search">
-												<!-- Show username -->
-												<td><a v-bind:href="'<?= $baseUrl; ?>/profile/' + item.guid">@{{ item.user }}</a></td>
-												<!-- If user is owner of post then strong text -->
-												<th v-if="item.user == '<?= $user ?>'">{{ item.quote }}</th>
-												<!-- If user isn't owner of post then simple text -->
-												<td v-if="item.user != '<?= $user ?>'">{{ item.quote }}</td>
-												<!-- date of post -->
-												<td>{{ item.postdate }}</td>
-												<!-- time of post -->
-												<td>{{ item.posttime }}</td>
-												<!-- # of likes -->
-												<td>
-													<a  data-toggle="modal" v-bind:data-target="'#users-' + item.id" style="cursor: pointer;">{{ item.likes }}</a>
-													<div class="modal fade" v-bind:id="'users-' + item.id" role="dialog">
-														<div class="modal-dialog modal-sm">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="modal-title">Likes</h4>
-																</div>
-																<div class="modal-body" style="padding: 0;">
-																	<ul class="list-group">
-																		<li class="list-group-item" v-for="user in item.users"><a v-bind:href="'<?= $baseUrl; ?>/profile/' + user.guid">@{{ user.user }}</a></li>
-																	</ul>
+											<tr v-for="(item, index) in search">
+												<template v-if="index >= start && index < start + size">
+													<!-- Show username -->
+													<td><a v-bind:href="'<?= $baseUrl; ?>/profile/' + item.guid">@{{ item.user }}</a></td>
+													<!-- If user is owner of post then strong text -->
+													<th v-if="item.user == '<?= $user ?>'">{{ item.quote }}</th>
+													<!-- If user isn't owner of post then simple text -->
+													<td v-if="item.user != '<?= $user ?>'">{{ item.quote }}</td>
+													<!-- date of post -->
+													<td>{{ item.postdate }}</td>
+													<!-- time of post -->
+													<td>{{ item.posttime }}</td>
+													<!-- # of likes -->
+													<td>
+														<a  data-toggle="modal" v-bind:data-target="'#users-' + item.id" style="cursor: pointer;">{{ item.likes }}</a>
+														<div class="modal fade" v-bind:id="'users-' + item.id" role="dialog">
+															<div class="modal-dialog modal-sm">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal">&times;</button>
+																		<h4 class="modal-title">Likes</h4>
+																	</div>
+																	<div class="modal-body" style="padding: 0;">
+																		<ul class="list-group">
+																			<li class="list-group-item" v-for="user in item.users"><a v-bind:href="'<?= $baseUrl; ?>/profile/' + user.guid">@{{ user.user }}</a></li>
+																		</ul>
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-												</td>
-												<!-- I the user voted then button 'like' -->
-												<td v-if="!contains(item.id)"><a v-bind:href="'../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
-												<!-- I the user voted then button 'unlike' -->
-												<td v-if="contains(item.id)"><a v-bind:href="'../src/modules/unlike.php?id=' + item.id" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></a></td>
-												<!-- If user is owner of post then button 'remove' -->
-												<td><a v-if="item.user == '<?= $user ?>'" v-bind:href="'../src/modules/delete.php?id=' + item.id" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+													</td>
+													<!-- I the user voted then button 'like' -->
+													<td v-if="!contains(item.id)"><a v-bind:href="'../src/modules/like.php?id=' + item.id" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></a></td>
+													<!-- I the user voted then button 'unlike' -->
+													<td v-if="contains(item.id)"><a v-bind:href="'../src/modules/unlike.php?id=' + item.id" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></a></td>
+													<!-- If user is owner of post then button 'remove' -->
+													<td><a v-if="item.user == '<?= $user ?>'" v-bind:href="'../src/modules/delete.php?id=' + item.id" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+												</template>
 											</tr>
 										</tbody>
 
@@ -157,6 +176,25 @@
 
 							</table>
 						</div>
+
+						<!-- Pagination -->
+						<div v-if="items.length" class="form-group pull-right">
+							<ul class="pagination">
+								<li v-if="page > 1">
+									<a href="#" v-on:click="prev">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li v-for="i in count" v-bind:class="{ active: page == i }">
+									<a href="#" v-on:click="page = i">{{ i }}</a>
+								</li>
+								<li v-if="page < count">
+									<a href="#" v-on:click="next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</form>
 			</div>
@@ -178,6 +216,10 @@
 				$voted = json_encode([]);
 				loadTable($items, $voted);
 			}
+		} else {
+			$items = json_encode([]);
+			$voted = json_encode([]);
+			loadTable($items, $voted);
 		}
 	} else {
 		$_SESSION["message"] = "Please login";

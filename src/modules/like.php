@@ -15,14 +15,19 @@
 		$conn = getConnection();
 
 		try {
-			$stmt = $conn->prepare("INSERT INTO LIKES (ID_USER, ID_QUOTE) VALUES (:user, :quote)");
+			$sql = "INSERT INTO	LIKES (ID_USER, ID_QUOTE)
+					VALUES		(:user, :quote);";
+			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":user", $user);
 			$stmt->bindParam(":quote", $quote);
 			$result = $stmt->execute();
 
 			if ($result) {
 				// Increments the 'likes' in the publication
-				$stmt = $conn->prepare("UPDATE QUOTES SET LIKES = LIKES + 1 WHERE ID_QUOTE = :id");
+				$sql = "UPDATE	QUOTES
+						SET		LIKES = LIKES + 1
+						WHERE	ID_QUOTE = :id;";
+				$stmt = $conn->prepare($sql);
 				$stmt->bindParam(":id", $quote);
 				$stmt->execute();
 

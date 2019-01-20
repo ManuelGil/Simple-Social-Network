@@ -11,7 +11,15 @@
 		$conn = getConnection();
 
 		try {
-			$stmt = $conn->prepare("SELECT U.ID_USER AS id, U.USERNAME AS user, U.CREATED_AT AS created, C.COUNTRY AS country FROM USERS AS U, COUNTRIES AS C WHERE U.ID_COUNTRY = C.ID_COUNTRY AND U.GUID = :guid");
+			$sql = "SELECT		U.ID_USER AS id,
+								U.USERNAME AS user,
+								U.CREATED_AT AS created,
+								C.COUNTRY AS country
+					FROM		USERS AS U
+					INNER JOIN	COUNTRIES AS C
+							ON	U.ID_COUNTRY = C.ID_COUNTRY
+					WHERE		U.GUID = :guid;";
+			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":guid", $guid);
 			$stmt->execute();
 			$query = $stmt->fetchObject();
@@ -87,7 +95,18 @@
 
 								try {
 									// Gets the publications
-									$stmt = $conn->prepare("SELECT Q.ID_QUOTE AS id, Q.QUOTE AS quote, Q.POST_DATE AS postdate, Q.POST_TIME AS posttime, Q.LIKES AS likes, U.GUID AS guid, U.USERNAME AS user FROM QUOTES AS Q, USERS AS U WHERE Q.ID_USER = U.ID_USER ORDER BY likes DESC");
+									$sql = "SELECT		Q.ID_QUOTE AS id,
+														Q.QUOTE AS quote,
+														Q.POST_DATE AS postdate,
+														Q.POST_TIME AS posttime,
+														Q.LIKES AS likes,
+														U.GUID AS guid,
+														U.USERNAME AS user
+											FROM		QUOTES AS Q
+											INNER JOIN	USERS AS U
+													ON	Q.ID_USER = U.ID_USER
+											ORDER BY	likes DESC;";
+									$stmt = $conn->prepare($sql);
 									$stmt->bindParam(":id", $id);
 									$stmt->execute();
 									$query = $stmt->fetchAll();
@@ -103,7 +122,13 @@
 											$obj->likes = $value['likes'];
 
 											// $obj->id = $value['ID_QUOTE'];
-											$stmt = $conn->prepare("SELECT U.GUID AS guid, U.USERNAME AS user FROM LIKES AS L, USERS AS U WHERE L.ID_USER = U.ID_USER AND L.ID_QUOTE = :id_quote");
+											$sql = "SELECT		U.GUID AS guid,
+																U.USERNAME AS user
+													FROM		LIKES AS L
+													INNER JOIN	USERS AS U
+															ON	L.ID_USER = U.ID_USER
+													WHERE		L.ID_QUOTE = :id_quote;";
+											$stmt = $conn->prepare($sql);
 											$stmt->bindParam(':id_quote', $value['id']);
 											$stmt->execute();
 											$users = $stmt->fetchAll();
