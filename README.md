@@ -132,6 +132,13 @@ ENGINE = InnoDB;
   4. Start a Text Editor (Atom, Sublime, Visual Studio Code, Vim, etc)
   5. Add the project folder to the editor
 
+<a name="Donate"></a>
+## :gift: Donate!
+
+If you want to help me to continue this project, you might donate via PayPal.
+
+<a href="https://paypal.me/ManuelFGil"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_92x26.png" alt="Donate via PayPal"></a>
+
 <a name="deployment"></a>
 ## :package: Deployment
 
@@ -537,17 +544,10 @@ You can test a demo websites [here](http://fav-quote.byethost17.com).
 		</tr>
 	</table>
 
-<a name="Donate"></a>
-## :gift: Donate!
-
-If you want to help me to continue this project, you might donate via PayPal.
-
-<a href="https://paypal.me/ManuelFGil"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_92x26.png" alt="Donate via PayPal"></a>
-
 <a name="authors"></a>
 ## :eyeglasses: Authors
 
-  * **Manuel Gil** - *Initial work* - [ManuelGil](https://github.com/ManuelGil) 
+  * **Manuel Gil** - *Owner* - [ManuelGil](https://github.com/ManuelGil) 
 
 See also the list of [contributors](https://github.com/ManuelGil/Simple-Social-Network/contributors)
  who participated in this project.
